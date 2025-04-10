@@ -1,0 +1,13 @@
+/progetto-futurista/
+├── /frontend/               # React o Svelte
+│   ├── /public/             # Assets statici
+│   ├── /src/
+│   │   ├── /components/     # Card olografiche, UI
+│   │   ├── /pages/          # Login, Dashboard
+│   │   └── /lib/            # API calls
+├── /backend/                # PHP o Node.js
+│   ├── /api/                # Endpoints (add_product.php, etc.)
+│   ├── /models/             # Database queries
+│   └── /config/             # DB connection
+├── /ai/                     # Script Python per AI (opzionale)
+└── README.md
