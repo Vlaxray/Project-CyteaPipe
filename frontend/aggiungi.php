@@ -1,5 +1,6 @@
 <?php
 require '/xampp/htdocs/mydashboard/CyteaPipe/db.php';
+require '/xampp/htdocs/mydashboard/CyteaPipe/auth_check.php';
 
 $stmt = $pdo->query("SELECT * FROM categories");
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -185,6 +186,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 <body>
+<header>
+    <a href="landing.php" class="logo">Western Chanel</a>
+    <div>
+        <?php if(isset($_SESSION['logged_in'])): ?>
+            <span style="color: var(--rich-amber); margin-right: 1rem;">
+                <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
+            </span>
+            <a href="logout.php" class="btn btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        <?php else: ?>
+            <a href="login.php" class="btn btn-secondary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        <?php endif; ?>
+    </div>
+</header>
 <div class="background-slider">
     <div class="background-track">
         <img src="close-up-metallic-cigar-ring.jpg" alt="Tè">

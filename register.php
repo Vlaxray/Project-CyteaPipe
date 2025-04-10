@@ -32,6 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$username, $email, $password]);
             
             $success = "Registrazione completata con successo!";
+            // Dopo il successo della registrazione
+if ($stmt->execute([$username, $email, $password])) {
+    $_SESSION['registration_success'] = "Registrazione completata! Ora puoi effettuare il login.";
+    header('Location: login.php');
+    exit;
+} 
         }
     } catch (PDOException $e) {
         $error = "Errore durante la registrazione: " . $e->getMessage();
@@ -193,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <div class="login-link">
-                Hai già un account? <a href="landing.php">Accedi</a>
+                Hai già un account? <a href="mydashboard/CyteaPipe/login.php">Accedi</a>
             </div>
         </div>
     </div>

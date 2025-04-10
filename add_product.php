@@ -1,6 +1,6 @@
 <?php
 require 'db.php'; // Connessione al DB
-
+require '/xampp/htdocs/mydashboard/CyteaPipe/auth_check.php';
 // Carica le categorie per il dropdown
 $stmt = $pdo->query("SELECT * FROM categories");
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);

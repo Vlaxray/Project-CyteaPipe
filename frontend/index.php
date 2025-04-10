@@ -1,6 +1,9 @@
 <?php
 require '/xampp/htdocs/mydashboard/CyteaPipe/db.php';
-
+// 1. Avvia la sessione PRIMA di qualsiasi output
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Gestione registrazione utente
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $username = $_POST['username'];
@@ -243,9 +246,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         gap: 2rem;
         margin-top: 4rem;
     }
-
-    
-
     .feature-card {
     background: rgba(30, 20, 18, 0.95);
     border: 1px solid var(--rich-amber);
@@ -276,7 +276,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     color: var(--tea-green);
     margin: 1rem 0 0.5rem;
 }
+/* Aggiungi al tuo stile esistente */
+.btn-secondary {
+    background: rgba(214, 167, 92, 0.2);
+    color: var(--rich-amber);
+    border: 1px solid var(--rich-amber);
+    transition: all 0.3s ease;
+}
 
+.btn-secondary:hover {
+    background: var(--rich-amber);
+    color: var(--dark-leaf);
+    transform: translateY(-2px);
+}
 .feature-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
@@ -293,14 +305,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 </head>
 <body>
     <div class="container">
-        <header>
-            <a href="landing.php" class="logo">Tè e Tabacco</a>
-            <div>
-                <button class="btn btn-secondary" id="registerBtn">
-                    <i class="fas fa-user-plus"></i> Registrati
-                </button>
-            </div>
-        </header>
+    <header>
+    <a href="landing.php" class="logo">Tè e tabacchi</a>
+    <div>
+        <?php if(isset($_SESSION['logged_in'])): ?>
+            <span style="color: var(--rich-amber); margin-right: 1rem;">
+                <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
+            </span>
+            <a href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        <?php else: ?>
+            <a href=href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        <?php endif; ?>
+    </div>
+</header>
         <h1 class="main-title" >Benvenuto!</h1>
         <p class="subtitle">L'essenza di ogni attimo catturata per sempre</p>
 

@@ -1,6 +1,6 @@
 <?php
 require 'db.php';
-
+require 'auth_check.php';
 // Recupera tutti i prodotti con nome categoria
 $sql = "SELECT products.*, categories.name AS category_name 
         FROM products 
@@ -208,12 +208,23 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container">
-        <header>
-            <a href="landing.php" class="logo">Tè e Tabacco</a>
-            <a href="add_product.php" class="btn">
-                <i class="fas fa-plus"></i> Aggiungi Prodotto
+    <header>
+    <a href="landing.php" class="logo">Western Chanel</a>
+    <div>
+        <?php if(isset($_SESSION['logged_in'])): ?>
+            <span style="color: var(--rich-amber); margin-right: 1rem;">
+                <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
+            </span>
+            <a href="logout.php" class="btn btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </a>
-        </header>
+        <?php else: ?>
+            <a href="login.php" class="btn btn-secondary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        <?php endif; ?>
+    </div>
+</header>
 
         <h1>Archivio</h1>
 

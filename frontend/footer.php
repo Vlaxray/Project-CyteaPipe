@@ -28,7 +28,15 @@
             <p style="line-height: 1.6;">
                 Questo diario è stato creato come esercizio di stile ma se lo trovi utile mi fa piacere.
         </div>
-        
+        <div style="margin-top: 1rem;">
+    <?php if(isset($_SESSION['logged_in'])): ?>
+        <span style="color: var(--tea-green);">Benvenuto, <?= htmlspecialchars($_SESSION['username']) ?></span>
+        <a href="logout.php" style="color: var(--tea-green); margin-left: 1rem;">Logout</a>
+    <?php else: ?>
+        <a href="C:\xampp\htdocs\mydashboard\CyteaPipe\login.php" style="color: var(--tea-green);">Login</a>
+        <a href="C:\xampp\htdocs\mydashboard\CyteaPipe\register.php" style="color: var(--tea-green); margin-left: 1rem;">Registrati</a>
+    <?php endif; ?>
+</div>
         <div>
             <h3 style="
                 color: var(--rich-amber);
