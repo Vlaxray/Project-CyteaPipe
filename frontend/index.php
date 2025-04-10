@@ -408,7 +408,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             </form>
         </div>
     </div>
-
+<footer><?php include 'footer.php'; ?></footer>
     <script>
         // Gestione modal registrazione
         const modal = document.getElementById('registerModal');

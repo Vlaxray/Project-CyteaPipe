@@ -275,5 +275,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         <?php endif; ?>
     </div>
+    <footer><?php include '/xampp/htdocs/mydashboard/CyteaPipe/frontend/footer.php'; ?></footer>
 </body>
 </html>

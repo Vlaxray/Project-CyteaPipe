@@ -102,6 +102,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         letter-spacing: 1px;
     }
 
+    .background-slider {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.background-track {
+    display: flex;
+    width: max-content;
+    animation: slide-left 300s linear infinite; /* Cambia 60s per regolare la velocità */
+}
+
+.background-track img {
+    height: 100vh;
+    width: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Animazione per far scorrere a sinistra */
+@keyframes slide-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
     input, select, textarea {
         width: 100%;
         padding: 0.75rem 1rem;
@@ -157,6 +185,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 <body>
+<div class="background-slider">
+    <div class="background-track">
+        <img src="close-up-metallic-cigar-ring.jpg" alt="Tè">
+        <img src="delicious-terere-drink-still-life.jpg" alt="Tabacco">
+        <img src="cigars_many.jpg" alt="Sigaro">
+        <img src="close-up-metallic-cigar-ring.jpg" alt="Tè">
+        <img src="delicious-terere-drink-still-life.jpg" alt="Tabacco">
+        <img src="cigars_many.jpg" alt="Sigaro">
+        <img src="close-up-metallic-cigar-ring.jpg" alt="Tè">
+        <img src="delicious-terere-drink-still-life.jpg" alt="Tabacco">
+        <img src="tea-winter-drink-burlap-fabric.jpg" alt="Sigaro">
+        <img src="cigars_many.jpg" alt="Tè">
+        <img src="delicious-terere-drink-still-life.jpg" alt="Tabacco">
+        <img src="tea-winter-drink-burlap-fabric.jpg" alt="Sigaro">
+        
+        <!-- Ripeti le immagini per continuità -->
+    </div>
+</div>
+
     <div class="container">
     <?php if(isset($success_message)): ?>
     <div class="success-message" id="successMessage">
@@ -233,8 +280,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </div>
-
-    <script>
+    <footer><?php include 'footer.php'; ?></footer>
+        <script>
         // Aggiunge un effetto hover alla card
         const luxuryCard = document.querySelector('.luxury-card');
         luxuryCard.addEventListener('mousemove', (e) => {
