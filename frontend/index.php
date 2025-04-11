@@ -350,16 +350,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         <span style="color: var(--rich-amber); margin-right: 1rem;">
             <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
         </span>
-        <a href="/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+        <a href="/mydashboard/CyteaPipe/frontend/logout.php" class="btn btn-secondary">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
     <?php else: ?>
         <a href="/mydashboard/CyteaPipe/frontend/login.php" class="btn btn-secondary" style="margin-bottom: 1rem;">
             <i class="fas fa-sign-in-alt"></i> Login
         </a>
-        <button id="registerBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
+        <a href="register.php" id="registerBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
             <i class="fas fa-user-plus"></i> Registrati
-        </button>
+        </a>
     <?php endif; ?>
 </div>
 </header>

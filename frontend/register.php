@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Registrazione | Western Chanel</title>
+    <title>Registrazione | Te e Tabacco</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -241,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 
             <div class="login-link">
-                Hai già un account? <a href="mydashboard/CyteaPipe/login.php">Accedi</a>
+                Hai già un account? <a href="login.php">Accedi</a>
             </div>
         </div>
     </div>
