@@ -128,6 +128,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         text-decoration: none;
     }
     </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
 </head>
 <body>
     <div class="login-container">
@@ -157,7 +161,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-sign-in-alt"></i> Accedi
                 </button>
             </form>
-
+            
+            
             <div class="register-link">
                 Non hai un account? <a href="register.php">Registrati</a>
             </div>

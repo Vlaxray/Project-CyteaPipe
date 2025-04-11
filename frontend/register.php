@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_confirm = trim($_POST['email_confirm']);
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
+    $terms = trim($_POST['']);
 
     // Validazioni
     $errors = [];
@@ -34,6 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "La password deve essere di almeno 8 caratteri";
     } elseif ($password !== $password_confirm) {
         $errors[] = "Le password non corrispondono";
+    }
+
+    if (!isset($_POST['privacy_terms'])) {
+        die("Devi accettare i termini della privacy per registrarti.");
     }
 
     if (empty($errors)) {
@@ -156,6 +161,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 1rem;
         }
 
+        .privacyy {
+            color:  #D6A75C;
+
+        }
         .message {
             padding: 1rem;
             margin-bottom: 1.5rem;
@@ -168,6 +177,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-left: 4px solid var(--rich-amber);
             color: var(--warm-parchment);
         }
+
+        .privacy-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Forza tutto su una riga */
+    font-weight: bold;
+    color: #f5b54a;
+}
+
+.privacy-label a {
+    color: #f5b54a;
+    text-decoration: underline;
+}
 
         .error {
             background: rgba(200, 0, 0, 0.15);
@@ -186,6 +209,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
 <body>
     <div class="register-container">
         <div class="register-card">
@@ -195,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if(isset($success)): ?>
                 <div class="message success">
-                    <?= $success ?> <a href="landing.php" style="color: var(--rich-amber);">Torna alla Home</a>
+                    <?= $success ?> <a href="index.php" style="color: var(--rich-amber);">Torna alla Home</a>
                 </div>
             <?php endif; ?>
 
@@ -234,6 +261,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password_confirm">Conferma Password</label>
         <input type="password" id="password_confirm" name="password_confirm" required>
     </div>
+
+    <div class="form-group">
+    <h4 class="privacy-label">
+        <input type="checkbox" id="privacy_terms" name="privacy_terms" required>
+        <span>Accetto i termini della <a href="https://www.iubenda.com/privacy-policy/11202545" target="_blank" rel="noreferrer nofollow">privacy</a>.</span>
+    </h4>
+</div>
+
+
+
 
     <button type="submit" class="submit-btn">
         Registrati

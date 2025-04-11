@@ -79,7 +79,7 @@
         color: var(--tea-green);
     ">
         <p>
-            &copy; <?= date('Y') ?> Tabacco & Tè. Tutti i diritti riservati.
+            &copy; <?= date('Y') ?> Tè e Tabacco - Tutti i diritti riservati.
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem;">
           <a href="#" style="color: var(--tea-green);">Privacy Policy</a> | <a href="#" style="color: var(--tea-green);">Termini e Condizioni</a>
