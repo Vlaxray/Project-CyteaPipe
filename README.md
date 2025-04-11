@@ -1,7 +1,7 @@
 # Project-CyteaPipe
-Work-in-progress 
+Work-in-progress
 
-1.Collecting ideas...Done!
-2.Planning...Done!
-3.Actually starting working on the project...Done!
-5.Publishing the project online...in progress
+LINK FUNZIONANTE --> http://teatabacco.altervista.org/
+
+I file che trovate su GIt sono un riferimento(incompleto e non aggiornato) della struttura che anima il sito
+
