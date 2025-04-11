@@ -346,23 +346,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     <header>
     <h1 class="logo">Tè e Tabacco<h1/>
     <div>
-        <?php if(isset($_SESSION['logged_in'])): ?>
-            <span style="color: var(--rich-amber); margin-right: 1rem;">
-                <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
-            </span>
-            <a href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php class="btn btn-secondary">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        <?php else: ?>
-            <button id="loginBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
-                <a href="http://localhost/mydashboard/CyteaPipe/login.php" style="color: var(--rich-amber); text-decoration: none;">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </a></button>
-            <button id="registerBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
+    <?php if(isset($_SESSION['logged_in'])): ?>
+        <span style="color: var(--rich-amber); margin-right: 1rem;">
+            <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
+        </span>
+        <a href="/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    <?php else: ?>
+        <a href="/mydashboard/CyteaPipe/frontend/login.php" class="btn btn-secondary" style="margin-bottom: 1rem;">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <button id="registerBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
             <i class="fas fa-user-plus"></i> Registrati
         </button>
-        <?php endif; ?>
-    </div>
+    <?php endif; ?>
+</div>
 </header>
         <h1 class="main-title" >Benvenuto!</h1>
         <p class="subtitle">L'essenza di ogni attimo catturata per sempre</p>
@@ -383,7 +382,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             <a href="aggiungi.php" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Aggiungi
             </a>
-            <a href="/mydashboard/CyteaPipe/products.php" class="btn btn-secondary">
+            <a href="products.php" class="btn btn-secondary">
                 <i class="fas fa-list"></i> Visualizza Archivio
             </a>
         </div>
@@ -414,7 +413,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         <div class="features">
             <div class="feature-card">
             <div class="feature-image">
-                <img src="close-up-metallic-cigar-ring.jpg" alt="Tè e relax" img-size="fit">
+                <img src="images/close-up-metallic-cigar-ring.jpg" alt="Tè e relax" img-size="fit">
                 </div>
                 <div class="feature-icon">
                     <i class="fas fa-leaf"></i>
@@ -424,7 +423,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             </div>
             <div class="feature-card">
             <div class="feature-image">
-                <img src="delicious-terere-drink-still-life.jpg" alt="Tè e relax">
+                <img src="images/delicious-terere-drink-still-life.jpg" alt="Tè e relax">
                 </div>
                 <div class="feature-icon">
                     <i class="fas fa-mug-hot"></i>
@@ -435,7 +434,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
             <div class="feature-card">
             <div class="feature-image">
-                <img src="coppa.jpg" alt="Tè e relax">
+                <img src="images/coppa.jpg" alt="Tè e relax">
                 </div>
                 <div class="feature-icon">
                     <i class="fas fa-award"></i>
@@ -473,10 +472,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     </div>
 <footer><?php include 'footer.php'; ?></footer>
     <script>
+        // Gestione modal login
+    const loginModal = document.getElementById('loginModal');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginCloseBtn = document.querySelector('.login-close-btn');
+
+    loginBtn.addEventListener('click', () => {
+        loginModal.style.display = 'flex';
+    });
+
+    loginCloseBtn.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.style.display = 'none';
+        }
+    });
         // Gestione modal registrazione
         const modal = document.getElementById('registerModal');
         const registerBtn = document.getElementById('registerBtn');
         const closeBtn = document.querySelector('.close-btn');
+
 
         registerBtn.addEventListener('click', () => {
             modal.style.display = 'flex';

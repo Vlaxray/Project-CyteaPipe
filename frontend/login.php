@@ -1,8 +1,10 @@
 <?php
-require 'db.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require '/xampp/htdocs/mydashboard/CyteaPipe/db.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,11 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
     
     if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['logged_in'] = true;
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        $_SESSION['logged_in'] = true;
+        $_SESSION['email'] = $user['email'];
         
-        header('Location: landing.php');
+        header('Location: /mydashboard/CyteaPipe/frontend/index.php');
         exit;
     } else {
         $error = "Email o password non validi";

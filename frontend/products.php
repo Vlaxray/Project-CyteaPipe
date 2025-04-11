@@ -1,6 +1,8 @@
 <?php
-require 'db.php';
-require 'auth_check.php';
+session_start();
+
+require  '/xampp/htdocs/mydashboard/CyteaPipe/db.php';
+require '/xampp/htdocs/mydashboard/CyteaPipe/auth_check.php';
 // Recupera tutti i prodotti con nome categoria
 $sql = "SELECT products.*, categories.name AS category_name 
         FROM products 

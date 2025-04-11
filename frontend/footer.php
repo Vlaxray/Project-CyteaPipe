@@ -48,8 +48,7 @@
                 Collegamenti
             </h3>
             <ul style="list-style: none; padding: 0; line-height: 2;">
-                                <li><a href="products.php" style="color: var(--warm-parchment); text-decoration: none;">📜 Prodotti</a></li>
-                                <li><a href="register.php" style="color: var(--warm-parchment); text-decoration: none;">👤 Registrati</a></li>
+                                <li><a href="https://thetradingoutpost.altervista.org/" style="color: var(--warm-parchment); text-decoration: none;"> 📈TheTradingOutpost </a></li>
             </ul>
         </div>
         

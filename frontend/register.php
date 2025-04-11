@@ -1,46 +1,74 @@
 <?php
 require '/xampp/htdocs/mydashboard/CyteaPipe/db.php';
 
+// Avvia la sessione per i messaggi flash
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $email_confirm = trim($_POST['email_confirm']);
+    $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
 
-    try {
-        // Verifica se l'utente esiste già
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
+    // Validazioni
+    $errors = [];
+    
+    if (empty($username)) {
+        $errors[] = "Il campo username è obbligatorio";
+    } elseif (strlen($username) < 3) {
+        $errors[] = "L'username deve essere di almeno 3 caratteri";
+    }
 
-        if ($user) {
-            $error = "Un utente con questa email esiste già.";
-        } else {
-            // Crea la tabella users se non esiste
-            $pdo->exec("
-                CREATE TABLE IF NOT EXISTS users (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(50) NOT NULL,
-                    email VARCHAR(100) NOT NULL UNIQUE,
-                    password VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ");
+    if (empty($email)) {
+        $errors[] = "Il campo email è obbligatorio";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "L'email inserita non è valida";
+    } elseif ($email !== $email_confirm) {
+        $errors[] = "Le email non corrispondono";
+    }
 
-            // Inserisce il nuovo utente
-            $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$username, $email, $password]);
+    if (empty($password)) {
+        $errors[] = "Il campo password è obbligatorio";
+    } elseif (strlen($password) < 8) {
+        $errors[] = "La password deve essere di almeno 8 caratteri";
+    } elseif ($password !== $password_confirm) {
+        $errors[] = "Le password non corrispondono";
+    }
+
+    if (empty($errors)) {
+        try {
+            // Verifica se l'utente esiste già
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->execute([$email]);
             
-            $success = "Registrazione completata con successo!";
-            // Dopo il successo della registrazione
-if ($stmt->execute([$username, $email, $password])) {
-    $_SESSION['registration_success'] = "Registrazione completata! Ora puoi effettuare il login.";
-    header('Location: login.php');
-    exit;
-} 
+            if ($stmt->fetch()) {
+                $errors[] = "Un utente con questa email esiste già";
+            } else {
+                // Crea la tabella users se non esiste
+                $pdo->exec("
+                    CREATE TABLE IF NOT EXISTS users (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        username VARCHAR(50) NOT NULL,
+                        email VARCHAR(100) NOT NULL UNIQUE,
+                        password VARCHAR(255) NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                ");
+
+                // Inserisce il nuovo utente
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                
+                if ($stmt->execute([$username, $email, $hashedPassword])) {
+                    $_SESSION['registration_success'] = "Registrazione completata! Ora puoi effettuare il login.";
+                    header('Location: login.php');
+                    exit;
+                }
+            }
+        } catch (PDOException $e) {
+            $errors[] = "Errore durante la registrazione: " . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        $error = "Errore durante la registrazione: " . $e->getMessage();
     }
 }
 ?>
@@ -171,32 +199,46 @@ if ($stmt->execute([$username, $email, $password])) {
                 </div>
             <?php endif; ?>
 
-            <?php if(isset($error)): ?>
-                <div class="message error">
-                    <?= $error ?>
-                </div>
-            <?php endif; ?>
+            <?php if(!empty($errors)): ?>
+    <div class="message error">
+        <ul>
+            <?php foreach($errors as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
             <form method="POST" action="">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" required>
+    </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+    </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+    <div class="form-group">
+        <label for="email_confirm">Conferma Email</label>
+        <input type="email" id="email_confirm" name="email_confirm" value="<?= htmlspecialchars($_POST['email_confirm'] ?? '') ?>" required>
+    </div>
 
-                <button type="submit" class="submit-btn">
-                    Registrati
-                </button>
-            </form>
+    <div class="form-group">
+        <label for="password">Password (minimo 8 caratteri)</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password_confirm">Conferma Password</label>
+        <input type="password" id="password_confirm" name="password_confirm" required>
+    </div>
+
+    <button type="submit" class="submit-btn">
+        Registrati
+    </button>
+</form>
 
             <div class="login-link">
                 Hai già un account? <a href="mydashboard/CyteaPipe/login.php">Accedi</a>
