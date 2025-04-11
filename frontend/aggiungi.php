@@ -183,7 +183,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         text-align: center;
     }
 </style>
-
+<link rel="preload" as="script" href="https://cdn.iubenda.com/cs/iubenda_cs.js"/>
+<link rel="preload" as="script" href="https://cdn.iubenda.com/cs/tcf/stub-v2.js"/>
+<script src="https://cdn.iubenda.com/cs/tcf/stub-v2.js"></script>
+<script>
+(_iub=self._iub||[]).csConfiguration={
+	cookiePolicyId: 11202545,
+	siteId: 3994511,
+	localConsentDomain: 'teatabacco.altervista.org',
+	timeoutLoadConfiguration: 30000,
+	lang: 'it',
+	enableTcf: true,
+	tcfVersion: 2,
+	tcfPurposes: {
+		 "2": "consent_only",
+		 "3": "consent_only",
+		 "4": "consent_only",
+		 "5": "consent_only",
+		 "6": "consent_only",
+		 "7": "consent_only",
+		 "8": "consent_only",
+		 "9": "consent_only",
+		"10": "consent_only"
+	},
+	invalidateConsentWithoutLog: true,
+	googleAdditionalConsentMode: true,
+	consentOnContinuedBrowsing: false,
+	banner: {
+		position: "top",
+		acceptButtonDisplay: true,
+		customizeButtonDisplay: true,
+		closeButtonDisplay: true,
+		closeButtonRejects: true,
+		fontSizeBody: "14px",
+	},
+}
+</script>
+<script async src="https://cdn.iubenda.com/cs/iubenda_cs.js"></script>
 </head>
 <body>
 <header>

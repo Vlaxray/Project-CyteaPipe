@@ -302,23 +302,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 }
 
 </style>
+<link rel="preload" as="script" href="https://cdn.iubenda.com/cs/iubenda_cs.js"/>
+<link rel="preload" as="script" href="https://cdn.iubenda.com/cs/tcf/stub-v2.js"/>
+<script src="https://cdn.iubenda.com/cs/tcf/stub-v2.js"></script>
+<script>
+(_iub=self._iub||[]).csConfiguration={
+	cookiePolicyId: 11202545,
+	siteId: 3994511,
+	localConsentDomain: 'teatabacco.altervista.org',
+	timeoutLoadConfiguration: 30000,
+	lang: 'it',
+	enableTcf: true,
+	tcfVersion: 2,
+	tcfPurposes: {
+		 "2": "consent_only",
+		 "3": "consent_only",
+		 "4": "consent_only",
+		 "5": "consent_only",
+		 "6": "consent_only",
+		 "7": "consent_only",
+		 "8": "consent_only",
+		 "9": "consent_only",
+		"10": "consent_only"
+	},
+	invalidateConsentWithoutLog: true,
+	googleAdditionalConsentMode: true,
+	consentOnContinuedBrowsing: false,
+	banner: {
+		position: "top",
+		acceptButtonDisplay: true,
+		customizeButtonDisplay: true,
+		closeButtonDisplay: true,
+		closeButtonRejects: true,
+		fontSizeBody: "14px",
+	},
+}
+</script>
+<script async src="https://cdn.iubenda.com/cs/iubenda_cs.js"></script>
 </head>
 <body>
     <div class="container">
+        
     <header>
-    <a href="landing.php" class="logo">Tè e tabacchi</a>
+    <h1 class="logo">Tè e Tabacco<h1/>
     <div>
         <?php if(isset($_SESSION['logged_in'])): ?>
             <span style="color: var(--rich-amber); margin-right: 1rem;">
                 <i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['username']) ?>
             </span>
-            <a href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+            <a href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php class="btn btn-secondary">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         <?php else: ?>
-            <a href=href="/xampp/htdocs/mydashboard/CyteaPipe/logout.php" class="btn btn-secondary">
+            <button id="loginBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
+                <a href="http://localhost/mydashboard/CyteaPipe/login.php" style="color: var(--rich-amber); text-decoration: none;">
                 <i class="fas fa-sign-in-alt"></i> Login
-            </a>
+            </a></button>
+            <button id="registerBtn" class="btn btn-secondary" style="margin-bottom: 1rem;">
+            <i class="fas fa-user-plus"></i> Registrati
+        </button>
         <?php endif; ?>
     </div>
 </header>

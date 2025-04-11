@@ -86,4 +86,6 @@
           <a href="#" style="color: var(--tea-green);">Privacy Policy</a> | <a href="#" style="color: var(--tea-green);">Termini e Condizioni</a>
         </p>
     </div>
+    <a href="https://www.iubenda.com/privacy-policy/11202545" rel="noreferrer nofollow" target="_blank">Privacy Policy</a>
+- <a href="#" role="button" class="iubenda-advertising-preferences-link">Personalizza tracciamento pubblicitario</a>
 </footer>
